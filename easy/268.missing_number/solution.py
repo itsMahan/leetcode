@@ -4,17 +4,19 @@ from typing import List
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
 
-        nums.sort()
-        i = 0
+        n = len(nums)
+        expected_total = 0
+        total = 0
+
+        for i in range(n+1):
+            expected_total += i
 
         for num in nums:
-            if num != i:
-                return i
-            else:
-                i += 1
+            total += num
 
-        return len(nums)
+        return expected_total - total
+
 
 
 s = Solution()
-print(s.missingNumber([9,6,4,2,3,5,7,0,1]))
+print(s.missingNumber([1, 0, 3]))
