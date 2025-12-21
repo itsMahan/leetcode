@@ -1,36 +1,19 @@
 from typing import List
 
-
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        max_index = 0
-        for i in range(len(nums)):
-            if nums[i] > nums[max_index]:
-                max_index = i
+        max_sub = nums[0]
+        curr_sum = 0
 
-        i, j = max_index - 1, max_index + 1
-        sum, max_sum = nums[max_index], nums[max_index]
+        for num in nums:
+            if  curr_sum < 0:
+                curr_sum = 0
 
-        while i >= 0:
-            if sum + nums[i] > max_sum:
-                sum += nums[i]
-                max_sum = sum
-            else:
-                sum += nums[i]
-            i -= 1
+            curr_sum += num
+            max_sub = max(max_sub, curr_sum)
 
-        sum = max_sum
-
-        while j < len(nums):
-            if sum + nums[j] > max_sum:
-                sum += nums[j]
-                max_sum = sum
-            else:
-                sum += nums[j]
-            j += 1
-
-        return max_sum
+        return max_sub
 
 
 s = Solution()
-print(s.maxSubArray([3,-2,-3,-3,1,3,0]))
+print(s.maxSubArray([-10, -8, -1, -5, -22]))
